@@ -1,29 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class VRInputControls : MonoBehaviour
 {
-    // 1
-    public SteamVR_TrackedObject trackedObj;
-    // 2
-    private SteamVR_Controller.Device Controller
+	public enum EInteractionMode
+	{
+		Standard,
+		Teleport,
+		ArmSwing,
+		GrabPull,
+	}
+
+	public EInteractionMode mode = EInteractionMode.Standard;
+
+	public Player player;
+
+	public GameObject locomotion;
+	public GameObject teleporter;
+	public GameObject armSwing;
+	public GameObject grabPull;
+
+	private void Awake()
     {
-        get { return SteamVR_Controller.Input((int)trackedObj.index); }
+
     }
 
-    private void Awake()
-    {
-        if(trackedObj == null)
-            trackedObj = GetComponent<SteamVR_TrackedObject>();
-        if (trackedObj == null)
-            trackedObj = GameObject.FindObjectOfType<SteamVR_TrackedObject>();
+	private void Start()
+	{
+		player = Player.instance;
+		if (player == null)
+			Debug.LogError("No player instance found!");
+		gameObject.SetActive(false);
+	}
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+    {	
 
     }
 }
