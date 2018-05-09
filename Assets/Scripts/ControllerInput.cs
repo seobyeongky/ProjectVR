@@ -18,16 +18,18 @@ public class ControllerInput : MonoBehaviour
 	private Vector2 facingDirection = Vector2.zero;
 
 	//meter per sec
-	public float movementSpeed = 1;
+	public float movementSpeed = 2;
 
-	public float rotationSpeed = 1;
+	public float rotationSpeed = 10;
 
 	public void Start()
 	{
 		player = Player.instance;
-		if (player == null)
-			Debug.LogError("No player instance found!");
-		gameObject.SetActive(false);
+        if (player == null)
+        {
+            Debug.LogError("No player instance found!");
+            gameObject.SetActive(false);
+        }
 	}
 
 	public void Update()
@@ -38,26 +40,31 @@ public class ControllerInput : MonoBehaviour
 		//right for view alignment
 		rightController = SteamVR_Controller.Input(SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost));
 
-		//strafing
-		if (leftController.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
-		{
-			movementDirection = GetNormalizedInputVector2(leftController.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0), touchThreshold);
-		}
+        //strafing
+        if (leftController.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            movementDirection = GetNormalizedInputVector2(leftController.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0), touchThreshold);
+        }
+        if (leftController.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
+            movementDirection = Vector2.zero;
 
-		Vector3 pos = transform.position;
+		Vector3 pos = player.trackingOriginTransform.transform.position;
+
+		pos.z += movementDirection.y * movementSpeed * Time.deltaTime;
 		pos.x += movementDirection.x * movementSpeed * Time.deltaTime;
-		pos.y += movementDirection.y * movementSpeed * Time.deltaTime;
-		transform.position = pos;
+        player.trackingOriginTransform.transform.position = pos;
 
 		//rotation
 		if (rightController.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
 		{
 			facingDirection = GetNormalizedInputVector2(rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0), touchThreshold);
-		}
-		Quaternion rot = transform.rotation;
-		rot *= Quaternion.Euler(facingDirection.x * rotationSpeed * Time.deltaTime, 0, 0);
-		rot *= Quaternion.Euler(0, facingDirection.y * rotationSpeed * Time.deltaTime, 0);
-		transform.rotation = rot;
+        }
+        if(rightController.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
+            facingDirection = Vector2.zero;
+        Quaternion rot = player.trackingOriginTransform.transform.rotation;
+		rot *= Quaternion.Euler(facingDirection.y * rotationSpeed * Time.deltaTime, facingDirection.x * rotationSpeed * Time.deltaTime, 0);
+        //rot *= Quaternion.Euler(0, facingDirection.y * rotationSpeed * Time.deltaTime, 0);
+        player.trackingOriginTransform.transform.rotation = rot;
 
 	}
 
@@ -68,7 +75,8 @@ public class ControllerInput : MonoBehaviour
 			temp.x = input.x;
 		if (input.y > threshold || input.y < -threshold)
 			temp.y = input.y;
-		temp.Normalize();
+        //if(temp.magnitude > 0)
+        //    temp.Normalize();
 		return temp;
 	}
 }
