@@ -48,11 +48,7 @@ public class ControllerInput : MonoBehaviour
         if (leftController.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
             movementDirection = Vector2.zero;
 
-		Vector3 pos = player.trackingOriginTransform.transform.position;
-
-		pos.z += movementDirection.y * movementSpeed * Time.deltaTime;
-		pos.x += movementDirection.x * movementSpeed * Time.deltaTime;
-        player.trackingOriginTransform.transform.position = pos;
+        player.movementRigidBody.velocity = Vector3.Scale(transform.forward, new Vector3(movementDirection.y,0,movementDirection.x)).normalized * movementSpeed;
 
 		//rotation
 		if (rightController.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
@@ -61,12 +57,15 @@ public class ControllerInput : MonoBehaviour
         }
         if(rightController.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
             facingDirection = Vector2.zero;
-        Quaternion rot = player.trackingOriginTransform.transform.rotation;
-		rot *= Quaternion.Euler(facingDirection.y * rotationSpeed * Time.deltaTime, facingDirection.x * rotationSpeed * Time.deltaTime, 0);
-        //rot *= Quaternion.Euler(0, facingDirection.y * rotationSpeed * Time.deltaTime, 0);
-        player.trackingOriginTransform.transform.rotation = rot;
 
-	}
+        foreach(var trs in player.hmdTransforms)
+        {
+            Quaternion rot = trs.rotation;
+            rot *= Quaternion.Euler(facingDirection.y * rotationSpeed * Time.deltaTime, facingDirection.x * rotationSpeed * Time.deltaTime, 0);
+            trs.rotation = rot;
+        }       
+
+    }
 
 	public static Vector2 GetNormalizedInputVector2(Vector2 input, float threshold)
 	{

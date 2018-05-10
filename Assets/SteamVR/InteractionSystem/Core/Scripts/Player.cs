@@ -19,6 +19,8 @@ namespace Valve.VR.InteractionSystem
 		[Tooltip( "Virtual transform corresponding to the meatspace tracking origin. Devices are tracked relative to this." )]
 		public Transform trackingOriginTransform;
 
+        public Rigidbody movementRigidBody;
+
 		[Tooltip( "List of possible transforms for the head/HMD, including the no-SteamVR fallback camera." )]
 		public Transform[] hmdTransforms;
 
