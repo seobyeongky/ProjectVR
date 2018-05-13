@@ -44,7 +44,7 @@ public class GrabInput : MonoBehaviour
             player.characterController.SimpleMove(Vector3.zero);
         }
 
-        Hand oldHand = trackedHand, newHand = null;
+        Hand  newHand = null;
         Vector3 tempPos = Vector3.zero;
         foreach (Hand hand in player.hands)
         {
@@ -96,13 +96,17 @@ public class GrabInput : MonoBehaviour
     {
         tracking = false;
         trackedHand = null;
-        direction = start - end;//inverse
-        direction.y = 0;
         if (duration == 0)
             duration = .1f;
-        float velocity = direction.magnitude * speed / duration;
+        direction = start - end;//inverse
+        direction.y = 0;
+        if (direction.magnitude <= movementThreshold)
+            direction = Vector3.zero;
+        if (duration < 0.1f)
+            direction = Vector3.zero;
+        direction = direction / duration;
         endTime = Time.unscaledTime + moveDuration;
-        Debug.LogFormat("[{0}],[{1}]", start, end);
+        //Debug.LogFormat("[{0}],[{1}]", start, end);
 
     }
 }
