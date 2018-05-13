@@ -102,7 +102,7 @@ public class GrabInput : MonoBehaviour
             duration = .1f;
         float velocity = direction.magnitude * speed / duration;
         endTime = Time.unscaledTime + moveDuration;
-        debug.LogFormat("[{0}],[{1}]", start, end);
+        Debug.LogFormat("[{0}],[{1}]", start, end);
 
     }
 }
