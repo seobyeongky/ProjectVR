@@ -642,14 +642,16 @@ namespace Valve.VR.InteractionSystem
 			teleportPointerObject.SetActive( false );
 
 			teleportArc.Hide();
-
-			foreach ( TeleportMarkerBase teleportMarker in teleportMarkers )
-			{
-				if ( teleportMarker != null && teleportMarker.markerActive && teleportMarker.gameObject != null )
-				{
-					teleportMarker.gameObject.SetActive( false );
-				}
-			}
+            if (teleportMarkers != null)
+            {
+                foreach (TeleportMarkerBase teleportMarker in teleportMarkers)
+                {
+                    if (teleportMarker != null && teleportMarker.markerActive && teleportMarker.gameObject != null)
+                    {
+                        teleportMarker.gameObject.SetActive(false);
+                    }
+                }
+            }
 
 			destinationReticleTransform.gameObject.SetActive( false );
 			invalidReticleTransform.gameObject.SetActive( false );

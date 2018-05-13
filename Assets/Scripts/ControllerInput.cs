@@ -43,7 +43,6 @@ public class ControllerInput : MonoBehaviour
         //TODO: implement trackpad movement that ignores all(accepts any) hand alignment.
         foreach(var hand in player.hands)
         {
-
         }
     }
     private void LeftRightControllerMovement()
@@ -84,9 +83,12 @@ public class ControllerInput : MonoBehaviour
         if (rightController.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
             facingDirection = Vector2.zero;
 
+        //rotation disabled for now
+        /*
         Vector3 rotation = player.transform.localEulerAngles;
         rotation += new Vector3(facingDirection.y * rotationSpeed * Time.deltaTime, facingDirection.x * rotationSpeed * Time.deltaTime, 0);
         player.transform.localEulerAngles = rotation;
+        */
     }
     public static Vector2 GetNormalizedInputVector2(Vector2 input, float threshold)
     {
