@@ -1420,6 +1420,72 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0.9170069, b: 0.453, a: 0.709}
   textHintPrefab: {fileID: 140952, guid: 5fa42bb9e52706a42b8a1eaf0b54326a, type: 2}
   debugHints: 0
+--- !u!1001 &901348993
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 475244, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252162, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24353744, guid: 95e98757653cbdb4988f62c7b9daebae,
+        type: 2}
+    - target: {fileID: 8261204, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24353744, guid: 95e98757653cbdb4988f62c7b9daebae,
+        type: 2}
+    - target: {fileID: 8265126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24353744, guid: 95e98757653cbdb4988f62c7b9daebae,
+        type: 2}
+    - target: {fileID: 8269332, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24353744, guid: 95e98757653cbdb4988f62c7b9daebae,
+        type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &901348994 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153878, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 2}
+  m_PrefabInternal: {fileID: 901348993}
 --- !u!1001 &907318045
 Prefab:
   m_ObjectHideFlags: 0
@@ -1920,7 +1986,7 @@ GameObject:
   - component: {fileID: 1221768386}
   - component: {fileID: 1221768385}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Inputs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2208,9 +2274,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523510973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94edb366d0f3af640b2a26dbf96d0565, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f962ecd80c9d104b8137e2529d58473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
+  player: {fileID: 0}
+  locomotion: {fileID: 1221768384}
+  teleporter: {fileID: 901348994}
+  armSwing: {fileID: 0}
+  grabPull: {fileID: 0}
 --- !u!1 &1564721084
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,9 +30,11 @@ public class VRInputControls : MonoBehaviour
 	private void Start()
 	{
 		player = Player.instance;
-		if (player == null)
-			Debug.LogError("No player instance found!");
-		gameObject.SetActive(false);
+        if (player == null)
+        {
+            Debug.LogError("No player instance found!");
+            gameObject.SetActive(false);
+        }
 	}
 
 	// Update is called once per frame

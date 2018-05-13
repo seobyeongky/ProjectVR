@@ -34,12 +34,27 @@ public class ControllerInput : MonoBehaviour
 
     public void Update()
     {
+        LeftRightControllerMovement();
+    }
+
+    private void SingleControllerMovement()
+    {
+        //unused
+        //TODO: implement trackpad movement that ignores all(accepts any) hand alignment.
+        foreach(var hand in player.hands)
+        {
+
+        }
+    }
+    private void LeftRightControllerMovement()
+    {
         //Find the controller every frame to make sure inputs are aligned no matter what
         //left for strafing
         leftController = SteamVR_Controller.Input(SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost));
         //right for view alignment
         rightController = SteamVR_Controller.Input(SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost));
 
+        movementDirection = Vector2.zero;//reset values. not necessary 
         //strafing
         if (leftController.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
         {
@@ -55,7 +70,7 @@ public class ControllerInput : MonoBehaviour
             if (trs.gameObject.activeInHierarchy)
             {
                 dir = trs.forward * movementDirection.y + trs.right * movementDirection.x;
-                Debug.LogFormat("[{0}],[{1}]=[{2}]", trs.forward, trs.right, dir);
+                //Debug.LogFormat("[{0}],[{1}]=[{2}]", trs.forward, trs.right, dir);
             }
         }
 
@@ -69,18 +84,10 @@ public class ControllerInput : MonoBehaviour
         if (rightController.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
             facingDirection = Vector2.zero;
 
-        /*
-        Quaternion rot = player.transform.rotation;
-        rot *= Quaternion.Euler(facingDirection.y * rotationSpeed * Time.deltaTime, 0, 0);
-        rot *= Quaternion.Euler(0, facingDirection.x * rotationSpeed * Time.deltaTime, 0);
-        player.transform.rotation = rot;
-        */
+        Vector3 rotation = player.transform.localEulerAngles;
+        rotation += new Vector3(facingDirection.y * rotationSpeed * Time.deltaTime, facingDirection.x * rotationSpeed * Time.deltaTime, 0);
+        player.transform.localEulerAngles = rotation;
     }
-
-    private void SingleControllerMovement()
-    {
-    }
-
     public static Vector2 GetNormalizedInputVector2(Vector2 input, float threshold)
     {
         Vector2 temp = Vector2.zero;
