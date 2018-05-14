@@ -29,6 +29,8 @@ namespace Valve.VR.InteractionSystem
 
 		public PlaySound hitGroundSound;
 
+        public LayerMask arrowLayerMask;
+
 		private bool inFlight;
 		private bool released;
 		private bool hasSpreadFire = false;
@@ -78,7 +80,7 @@ namespace Valve.VR.InteractionSystem
 			}
 
 			// Check if arrow is shot inside or too close to an object
-			RaycastHit[] hits = Physics.SphereCastAll( transform.position, 0.01f, transform.forward, 0.80f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore );
+			RaycastHit[] hits = Physics.SphereCastAll( transform.position, 0.01f, transform.forward, 0.80f, arrowLayerMask, QueryTriggerInteraction.Ignore );
 			foreach ( RaycastHit hit in hits )
 			{
 				if ( hit.collider.gameObject != gameObject && hit.collider.gameObject != arrowHeadRB.gameObject && hit.collider != Player.instance.headCollider )

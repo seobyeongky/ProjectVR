@@ -241,6 +241,7 @@ namespace Valve.VR.InteractionSystem
 			bow.ArrowReleased();
 
 			allowArrowSpawn = false;
+            Debug.Log("firing");
 			Invoke( "EnableArrowSpawn", 0.5f );
 			StartCoroutine( ArrowReleaseHaptics() );
 
