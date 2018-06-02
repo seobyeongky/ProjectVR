@@ -12,12 +12,21 @@ public class ChestBoxSpawner : MonoBehaviour
 
 	public int chestSpawnLimit = 100;
 	public bool spawn = false;
+	public bool clean = false;
 	public void Update()
 	{
 		if (spawn)
 		{
 			spawn = false;
 			SpawnChests();
+		}
+		if (clean)
+		{
+			clean = false;
+			for(int a = transform.childCount-1;  a > -1; a --)
+			{
+				DestroyImmediate(transform.GetChild(a).gameObject);
+			}
 		}
 	}
 
@@ -30,8 +39,8 @@ public class ChestBoxSpawner : MonoBehaviour
 			randPos.x = Random.Range(bounds.x, bounds.width);
 			randPos.y = Random.Range(bounds.y, bounds.height);
 
-			float height = terrain.terrainData.GetInterpolatedHeight(randPos.x/bounds.x, randPos.y/bounds.y);
-			Vector3 normals = terrain.terrainData.GetInterpolatedNormal(randPos.x / bounds.x, randPos.y / bounds.y);
+			float height = terrain.terrainData.GetInterpolatedHeight(randPos.x/ terrain.terrainData.size.x, randPos.y/ terrain.terrainData.size.z);
+			Vector3 normals = terrain.terrainData.GetInterpolatedNormal(randPos.x / terrain.terrainData.size.x, randPos.y / terrain.terrainData.size.z);
 			if (height <= heightLimit)
 			{
 				bool valid = true;
