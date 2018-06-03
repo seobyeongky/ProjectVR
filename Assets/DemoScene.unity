@@ -2562,6 +2562,24 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+  - waitFor: 60
+    repeat: 1
+    triggeredEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2110387527}
+          m_MethodName: LogChestCount
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 3
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!1 &1564721084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,6 +3143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110387525}
   - component: {fileID: 2110387526}
+  - component: {fileID: 2110387527}
   m_Layer: 0
   m_Name: ChestSpawner
   m_TagString: Untagged
@@ -3169,3 +3188,18 @@ MonoBehaviour:
   chestSpawnLimit: 50
   spawn: 0
   clean: 0
+--- !u!114 &2110387527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110387524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1909e543121402498b3bf328b0ad840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackPosition: 0
+  trackRotation: 0
+  fileName: Temp.txt
+  logEnabled: 0

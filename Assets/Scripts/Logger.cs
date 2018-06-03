@@ -57,12 +57,16 @@ public class Logger : MonoBehaviour
 		file.WriteLine("##Log Start##\nTracking " + (trackPosition ? "position" : "") + (trackRotation ? "rotation" : ""));
 	}
 
+	public void LogChestCount()
+	{
+		file.WriteLine(ChestItem.count);
+	}
+
 	public void EndLogging()
 	{
 		logEnabled = false;
 		if (file != null)
 		{
-			file.WriteLine("Count : " + ChestItem.count);
 			file.Flush();
 			file.Close();
 			file = null;
