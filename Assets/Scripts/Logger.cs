@@ -20,22 +20,12 @@ public class Logger : MonoBehaviour
 
 	private void OnDisable()
 	{
-		if (file != null)
-		{
-			file.Flush();
-			file.Close();
-			file = null;
-		}
+		EndLogging();
 	}
 
 	private void OnDestroy()
 	{
-		if (file != null)
-		{
-			file.Flush();
-			file.Close();
-			file = null;
-		}
+		EndLogging();
 	}
 
 	private void FixedUpdate()
@@ -72,6 +62,7 @@ public class Logger : MonoBehaviour
 		logEnabled = false;
 		if (file != null)
 		{
+			file.WriteLine("Count : " + ChestItem.count);
 			file.Flush();
 			file.Close();
 			file = null;
