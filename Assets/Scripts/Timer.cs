@@ -41,6 +41,10 @@ public class Timer : MonoBehaviour
 					if(!not.repeat)
 						removeList.Add(not);
 					not.triggeredEvent.Invoke();
+					if (not.repeat)
+					{
+						not.UpdateTime();
+					}
 				}
 			}
 
@@ -68,10 +72,15 @@ public class Timer : MonoBehaviour
 
 		public void Start()
 		{
-			startTime = Time.unscaledTime;
-			endTime = startTime + waitFor;
+			UpdateTime();
 		}
 
 		public bool End { get { return endTime <= Time.unscaledTime; } }
+
+		public void UpdateTime()
+		{
+			startTime = Time.unscaledTime;
+			endTime = startTime + waitFor;
+		}
 	}
 }
